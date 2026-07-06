@@ -37,8 +37,12 @@ export const auth = (...requiredRoles: Role[]) => {
 
     const verifiedToken = jwtUtils.verifyToken(
       token,
-      config.jwt_access_expires_in as string,
+      config.jwt_access_secret as string,
     );
+    // const verifiedToken = jwtUtils.verifyToken(
+    //   token,
+    //   config.jwt_access_expires_in as string,
+    // );
 
     if (!verifiedToken.success) {
       throw new Error(verifiedToken.error);
@@ -52,7 +56,10 @@ export const auth = (...requiredRoles: Role[]) => {
       );
     }
 
-    const user = await prisma.tanant.findUnique({
+    // const user = await prisma.tanant.findUnique({
+    //   where: { id, email, name, role },
+    // });
+    const user = await prisma.user.findUnique({
       where: { id, email, name, role },
     });
 
