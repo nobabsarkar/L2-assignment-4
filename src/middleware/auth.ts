@@ -44,30 +44,29 @@ export const auth = (...requiredRoles: Role[]) => {
       throw new Error(verifiedToken.error);
     }
 
-    const {email, name, id role} = verifiedToken.data as JwtPayload;
+    const { email, name, id, role } = verifiedToken.data as JwtPayload;
 
-    if(requiredRoles && !requiredRoles.includes(role)){
-        throw new Error("Forbidden. You don't have permission to access this resource.")
-
+    if (requiredRoles && !requiredRoles.includes(role)) {
+      throw new Error(
+        "Forbidden. You don't have permission to access this resource.",
+      );
     }
 
     const user = await prisma.tanant.findUnique({
-        where:{id, email, name, role}
-    })
+      where: { id, email, name, role },
+    });
 
-    if(!user){
-        throw new Error("User not found. Please login again")
+    if (!user) {
+      throw new Error("User not found. Please login again");
     }
 
-    req.secret = {
-        email,
-        name,
-        id,
-        role
-    } 
+    req.user = {
+      email,
+      name,
+      id,
+      role,
+    };
 
-    next()
-
-
+    next();
   });
 };

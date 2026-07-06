@@ -4,3 +4,8 @@
     LANDLORD
     ADMIN
 }
+
+enum UserStatus {
+    ACTIVE
+    BLOCKED
+}
