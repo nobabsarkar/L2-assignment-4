@@ -23,7 +23,7 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
     success: true,
     statusCode: httpStatus.OK,
     message: "User profile retrived successfully",
-    data: { profile },
+    data: profile,
   });
 });
 
