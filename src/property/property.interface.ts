@@ -11,3 +11,8 @@ export interface IProperty {
   landlordId: string;
   categoryId: string;
 }
+
+export interface IPostQuery {
+  searchTerm?: string;
+  price?: number;
+}

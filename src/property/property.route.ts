@@ -11,4 +11,8 @@ router.post(
   propertyController.createProperty,
 );
 
+router.get("/properties", propertyController.getAllProperty);
+
+router.get("/properties/:propertyId", propertyController.getSingleProperty);
+
 export const propertyRoutes = router;
