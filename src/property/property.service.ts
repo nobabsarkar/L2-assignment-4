@@ -25,15 +25,6 @@ const getAllPropertyFromDB = async (query: any) => {
     });
   }
 
-  // if (query.minPrice || query.maxPrice) {
-  //   andConditions.push({
-  //     price: {
-  //       gte: query.minPrice ? Number(query.minPrice) : undefined,
-  //       lte: query.maxPrice ? Number(query.maxPrice) : undefined,
-  //     },
-  //   });
-  // }
-
   if (query.price) {
     andConditions.push({
       price: {
@@ -70,8 +61,56 @@ const getSinglePropertyFromDB = async (propertyId: string) => {
   return result;
 };
 
+const updatePropertiesLandlordIntoDB = async (
+  propertyId: string,
+  landlordId: string,
+  payload: Partial<IProperty>,
+) => {
+  const property = await prisma.property.findFirstOrThrow({
+    where: {
+      id: propertyId,
+      landlordId: landlordId,
+    },
+  });
+
+  if (!property) {
+    throw new Error("Property not found.");
+  }
+
+  const result = await prisma.property.update({
+    where: {
+      id: propertyId,
+    },
+    data: payload,
+  });
+
+  return result;
+};
+
+const deletePropertiesLandlordFromDB = async (
+  propertyId: string,
+  landlordId: string,
+) => {
+  await prisma.property.findFirstOrThrow({
+    where: {
+      id: propertyId,
+      landlordId,
+    },
+  });
+
+  const result = await prisma.property.delete({
+    where: {
+      id: propertyId,
+    },
+  });
+
+  return result;
+};
+
 export const propertySerivce = {
   createPropertyIntoDB,
   getAllPropertyFromDB,
   getSinglePropertyFromDB,
+  updatePropertiesLandlordIntoDB,
+  deletePropertiesLandlordFromDB,
 };

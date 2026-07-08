@@ -15,4 +15,16 @@ router.get("/properties", propertyController.getAllProperty);
 
 router.get("/properties/:propertyId", propertyController.getSingleProperty);
 
+router.put(
+  "/landlord/properties/:propertyId",
+  auth(Role.LANDLORD),
+  propertyController.updatePropertiesLandlord,
+);
+
+router.delete(
+  "/landlord/properties/:propertyId",
+  auth(Role.LANDLORD),
+  propertyController.deletePropertiesLandlord,
+);
+
 export const propertyRoutes = router;

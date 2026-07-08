@@ -48,8 +48,48 @@ const getSingleProperty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updatePropertiesLandlord = catchAsync(
+  async (req: Request, res: Response) => {
+    const propertyId = req.params.propertyId;
+    const landlordId = req.user?.id;
+
+    const result = await propertySerivce.updatePropertiesLandlordIntoDB(
+      propertyId as string,
+      landlordId as string,
+      req.body,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Property update successfully",
+      data: result,
+    });
+  },
+);
+
+const deletePropertiesLandlord = catchAsync(
+  async (req: Request, res: Response) => {
+    const propertyId = req.params.propertyId;
+    const landlordId = req.user?.id;
+
+    const result = await propertySerivce.deletePropertiesLandlordFromDB(
+      propertyId as string,
+      landlordId as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: " Delete property successfully",
+      data: result,
+    });
+  },
+);
 export const propertyController = {
   createProperty,
   getAllProperty,
   getSingleProperty,
+  updatePropertiesLandlord,
+  deletePropertiesLandlord,
 };
