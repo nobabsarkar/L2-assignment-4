@@ -8,6 +8,7 @@ model User {
     status UserStatus @default(ACTIVE)
 
     profile Profile?
+    properties Property[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
