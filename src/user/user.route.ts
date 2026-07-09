@@ -15,4 +15,16 @@ router.get(
 
 router.get("/admin/users", auth(Role.ADMIN), userController.getAllUsers);
 
+router.patch(
+  "/admin/users/:userId",
+  auth(Role.ADMIN),
+  userController.updateUserStatus,
+);
+
+router.get(
+  "/admin/properties",
+  auth(Role.ADMIN),
+  userController.getAllProperties,
+);
+
 export const userRoutes = router;

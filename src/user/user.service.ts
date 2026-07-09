@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "../lib/prisma";
 import type { RegisterUser } from "./user.interface";
 import config from "../config";
-import { Role } from "../../generated/prisma/enums";
+import { Role, UserStatus } from "../../generated/prisma/enums";
 
 const registerUserIntoDB = async (payload: RegisterUser) => {
   const { name, email, password, profilePhoto, role } = payload;
@@ -82,8 +82,42 @@ const getAllUsersFromDB = async () => {
   return users;
 };
 
+const updateUserStatusIntoDB = async (
+  adminId: string,
+  userId: string,
+  status: UserStatus,
+) => {
+  const admin = await prisma.user.findUniqueOrThrow({
+    where: {
+      id: adminId,
+    },
+  });
+
+  if (admin.role !== Role.ADMIN) {
+    throw new Error("Only admin can update user status.");
+  }
+
+  const result = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      status,
+    },
+  });
+
+  return result;
+};
+
+const getAllPropertiesFromDB = async () => {
+  const result = await prisma.property.findMany();
+  return result;
+};
+
 export const userSerivce = {
   registerUserIntoDB,
   getMyProfileFromDB,
   getAllUsersFromDB,
+  updateUserStatusIntoDB,
+  getAllPropertiesFromDB,
 };

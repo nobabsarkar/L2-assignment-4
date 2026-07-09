@@ -38,8 +38,40 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
+  const adminId = req.user?.id;
+  const { userId } = req.params;
+  const { status } = req.body;
+
+  const result = await userSerivce.updateUserStatusIntoDB(
+    adminId as string,
+    userId as string,
+    status,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User status updated successfully",
+    data: result,
+  });
+});
+
+const getAllProperties = catchAsync(async (req: Request, res: Response) => {
+  const result = await userSerivce.getAllPropertiesFromDB();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Property retrived successfully",
+    data: result,
+  });
+});
+
 export const userController = {
   registerUser,
   getMyProfile,
   getAllUsers,
+  updateUserStatus,
+  getAllProperties,
 };
