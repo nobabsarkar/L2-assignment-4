@@ -13,4 +13,6 @@ router.get(
   userController.getMyProfile,
 );
 
+router.get("/admin/users", auth(Role.ADMIN), userController.getAllUsers);
+
 export const userRoutes = router;

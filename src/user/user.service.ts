@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "../lib/prisma";
 import type { RegisterUser } from "./user.interface";
 import config from "../config";
+import { Role } from "../../generated/prisma/enums";
 
 const registerUserIntoDB = async (payload: RegisterUser) => {
   const { name, email, password, profilePhoto, role } = payload;
@@ -63,7 +64,26 @@ const getMyProfileFromDB = async (userId: string) => {
   return user;
 };
 
+const getAllUsersFromDB = async () => {
+  const users = await prisma.user.findMany({
+    where: {
+      role: {
+        in: [Role.LANDLORD, Role.TENANT],
+      },
+    },
+    omit: {
+      password: true,
+    },
+    include: {
+      profile: true,
+    },
+  });
+
+  return users;
+};
+
 export const userSerivce = {
   registerUserIntoDB,
   getMyProfileFromDB,
+  getAllUsersFromDB,
 };
