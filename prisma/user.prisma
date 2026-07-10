@@ -9,9 +9,11 @@ model User {
 
     profile Profile?
     properties Property[]
+    rentalRequests RentalRequest[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@map("users")
+    
 }

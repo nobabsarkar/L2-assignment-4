@@ -1,0 +1,13 @@
+
+model RentalRequest { 
+  id    Int     @id @default(autoincrement()) 
+  status RentalStatus @default(PENDING)
+
+  tenantId String
+  tenant User @relation(fields: [tenantId], references: [id], onDelete:Cascade)
+
+  propertyId String 
+  property Property @relation(fields: [propertyId], references: [id], onDelete:Cascade)
+
+  @@map("rentalRequests")
+} 

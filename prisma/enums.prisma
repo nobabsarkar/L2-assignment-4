@@ -9,3 +9,9 @@ enum UserStatus {
     ACTIVE
     BLOCKED
 }
+
+enum RentalStatus {
+    PENDING
+    APPROVED
+    REJECTED
+}

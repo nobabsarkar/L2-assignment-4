@@ -86,6 +86,7 @@ const deletePropertiesLandlord = catchAsync(
     });
   },
 );
+
 export const propertyController = {
   createProperty,
   getAllProperty,
