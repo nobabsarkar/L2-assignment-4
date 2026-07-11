@@ -1,3 +1,4 @@
+import type { RentalStatus } from "../../generated/prisma/enums";
 import type { PropertyWhereInput } from "../../generated/prisma/models";
 import { prisma } from "../lib/prisma";
 import type { IPostQuery, IProperty } from "./property.interface";
@@ -107,10 +108,58 @@ const deletePropertiesLandlordFromDB = async (
   return result;
 };
 
+const landloadGetRentalRequestFromDB = async (landlordId: string) => {
+  const result = await prisma.rentalRequest.findMany({
+    where: {
+      property: {
+        landlordId,
+      },
+    },
+    include: {
+      tenant: true,
+      property: true,
+    },
+    omit: {
+      tenantId: true,
+      propertyId: true,
+    },
+  });
+
+  return result;
+};
+
+const landlordUpdateRentalRequestStatusIntoDB = async (
+  requestId: string,
+  landlordId: string,
+  status: RentalStatus,
+) => {
+  const rentalRequest = await prisma.rentalRequest.findFirstOrThrow({
+    where: {
+      id: requestId,
+      property: {
+        landlordId,
+      },
+    },
+  });
+
+  const result = await prisma.rentalRequest.update({
+    where: {
+      id: rentalRequest.id,
+    },
+    data: {
+      status,
+    },
+  });
+
+  return result;
+};
+
 export const propertySerivce = {
   createPropertyIntoDB,
   getAllPropertyFromDB,
   getSinglePropertyFromDB,
   updatePropertiesLandlordIntoDB,
   deletePropertiesLandlordFromDB,
+  landloadGetRentalRequestFromDB,
+  landlordUpdateRentalRequestStatusIntoDB,
 };

@@ -13,6 +13,7 @@ import { authRoutes } from "./auth/auth.route";
 import { categoryRoutes } from "./category/category.route";
 import { propertyRoutes } from "./property/property.route";
 import { rentalRquestRoutes } from "./rentalRequest/rentalRequest.route";
+import { reviewRoutes } from "./review/review.route";
 
 const app: Application = express();
 
@@ -37,6 +38,7 @@ app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", propertyRoutes);
 app.use("/api", rentalRquestRoutes);
+app.use("/api", reviewRoutes);
 
 app.use(notFound);
 
