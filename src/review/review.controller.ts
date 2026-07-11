@@ -12,7 +12,6 @@ const createReview = catchAsync(async (req: Request, res: Response) => {
     tenantId as string,
     payload,
   );
-  console.log(result);
 
   sendResponse(res, {
     success: true,

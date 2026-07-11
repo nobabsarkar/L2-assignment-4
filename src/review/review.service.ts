@@ -13,10 +13,14 @@ const createReviewIntoDB = async (tenantId: string, payload: IReview) => {
       ...payload,
       tenantId,
     },
-    // include: {
-    //   tenantId: true,
-    //   propertyId: true,
-    // },
+    include: {
+      tenant: true,
+      property: true,
+    },
+    omit: {
+      tenantId: true,
+      propertyId: true,
+    },
   });
 
   return result;
