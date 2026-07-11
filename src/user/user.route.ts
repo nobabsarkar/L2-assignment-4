@@ -27,4 +27,10 @@ router.get(
   userController.getAllProperties,
 );
 
+router.get(
+  "/admin/rentals",
+  auth(Role.ADMIN),
+  userController.getAllRentalRequest,
+);
+
 export const userRoutes = router;

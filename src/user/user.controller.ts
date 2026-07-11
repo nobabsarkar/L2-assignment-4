@@ -68,10 +68,22 @@ const getAllProperties = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllRentalRequest = catchAsync(async (req: Request, res: Response) => {
+  const result = await userSerivce.getAllRentalsRequestFromDB();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Rental request retrived successfully",
+    data: result,
+  });
+});
+
 export const userController = {
   registerUser,
   getMyProfile,
   getAllUsers,
   updateUserStatus,
   getAllProperties,
+  getAllRentalRequest,
 };

@@ -114,10 +114,24 @@ const getAllPropertiesFromDB = async () => {
   return result;
 };
 
+const getAllRentalsRequestFromDB = async () => {
+  const result = await prisma.rentalRequest.findMany({
+    include: {
+      property: true,
+      tenant: true,
+    },
+    omit: {
+      propertyId: true,
+    },
+  });
+  return result;
+};
+
 export const userSerivce = {
   registerUserIntoDB,
   getMyProfileFromDB,
   getAllUsersFromDB,
   updateUserStatusIntoDB,
   getAllPropertiesFromDB,
+  getAllRentalsRequestFromDB,
 };
