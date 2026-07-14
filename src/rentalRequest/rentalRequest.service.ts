@@ -4,11 +4,15 @@ const createRentalRequestIntoDB = async (
   tenantId: string,
   propertyId: string,
 ) => {
-  await prisma.property.findUniqueOrThrow({
+  const property = await prisma.property.findUniqueOrThrow({
     where: {
       id: propertyId,
     },
   });
+
+  if (!property) {
+    throw new Error("Property not found.");
+  }
 
   const isExist = await prisma.rentalRequest.findFirst({
     where: {
