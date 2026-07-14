@@ -14,4 +14,7 @@ export default {
 
   jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
+
+  ssl_commerz_store_id: process.env.SSL_COMMERZ_STORE_ID,
+  ssl_commerz_store_password: process.env.SSL_COMMERZ_STORE_PASSWORD,
 };

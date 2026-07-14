@@ -1,4 +1,6 @@
+import type { JwtPayload } from "jsonwebtoken";
 import { prisma } from "../lib/prisma";
+import { paymentService } from "../payment/payment.service";
 
 const createRentalRequestIntoDB = async (
   tenantId: string,
@@ -25,14 +27,24 @@ const createRentalRequestIntoDB = async (
     throw new Error("You have already requested this property.");
   }
 
-  const result = await prisma.rentalRequest.create({
+  // const totalAmount = Number(property.price)
+
+  const rentalRequest = await prisma.rentalRequest.create({
     data: {
       tenantId,
       propertyId,
     },
   });
 
-  return result;
+  const paymentUrl = await paymentService.initiatePayment(
+    rentalRequest.id,
+    tenantId,
+  );
+
+  return {
+    rentalRequest,
+    paymentUrl,
+  };
 };
 
 const getAllRentalsRequestFromDB = async (tenantId: string) => {

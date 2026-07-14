@@ -2,7 +2,7 @@
 model Payment {
     id String @id @default(uuid())
     transactionId String @unique
-    amount Int 
+    amount Float 
     status PaymentStatus
 
     rentalRequestId String 
