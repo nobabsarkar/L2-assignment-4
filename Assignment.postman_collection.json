@@ -7,7 +7,7 @@
   },
   "item": [
     {
-      "name": "Assignment-4 Copy",
+      "name": "Assignment-4",
       "item": [
         {
           "name": "Users",
@@ -57,7 +57,7 @@
                 "header": [
                   {
                     "key": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoibm9iYWJAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNTg2NTU0LCJleHAiOjE3ODM2NzI5NTR9.zdMVQ-9tYaoG6T__rRV_LMYum_KlIpgPEPwptYfzDVk",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJjYWE2ZjcxLTM1YmEtNGE1NS1iYTBkLTBkYmJhYzFlM2JlYiIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg0MTEyNjk0LCJleHAiOjE3ODQxOTkwOTR9.t16KRwUL3UZWyy4BCqZdQp_1xROCcA-nCUzMOxWKgAo",
                     "type": "text"
                   }
                 ],
@@ -94,13 +94,13 @@
                 "header": [
                   {
                     "key": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoibm9iYWJAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNjE2MDY5LCJleHAiOjE3ODM3MDI0Njl9.BgZOJi1pbKfuaR0hDXV1N00Uiaj87SCrDOQ8ZBpTvLs",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJjYWE2ZjcxLTM1YmEtNGE1NS1iYTBkLTBkYmJhYzFlM2JlYiIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg0MTEyNjk0LCJleHAiOjE3ODQxOTkwOTR9.t16KRwUL3UZWyy4BCqZdQp_1xROCcA-nCUzMOxWKgAo",
                     "type": "text"
                   }
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"status\":\"BLOCKED\"\r\n}",
+                  "raw": "{\r\n    \"status\":\"ACTIVE\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -108,7 +108,7 @@
                   }
                 },
                 "url": {
-                  "raw": "localhost:5000/api/admin/users/e80af332-bf75-4bd1-a34f-4556301b7332",
+                  "raw": "localhost:5000/api/admin/users/51f02055-7aad-4f56-ad3c-378c7f3ab72a",
                   "host": [
                     "localhost"
                   ],
@@ -117,7 +117,7 @@
                     "api",
                     "admin",
                     "users",
-                    "e80af332-bf75-4bd1-a34f-4556301b7332"
+                    "51f02055-7aad-4f56-ad3c-378c7f3ab72a"
                   ]
                 }
               },
@@ -133,7 +133,7 @@
                 "header": [
                   {
                     "key": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoibm9iYWJAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNjE2MDY5LCJleHAiOjE3ODM3MDI0Njl9.BgZOJi1pbKfuaR0hDXV1N00Uiaj87SCrDOQ8ZBpTvLs",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJjYWE2ZjcxLTM1YmEtNGE1NS1iYTBkLTBkYmJhYzFlM2JlYiIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg0MTEyNjk0LCJleHAiOjE3ODQxOTkwOTR9.t16KRwUL3UZWyy4BCqZdQp_1xROCcA-nCUzMOxWKgAo",
                     "type": "text"
                   }
                 ],
@@ -691,13 +691,13 @@
                 "header": [
                   {
                     "key": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzgzNzU1NTI3LCJleHAiOjE3ODM4NDE5Mjd9.2HIuTVi110lQo85AhsaY215-oUQM_6JsxQUwYKYsSa4",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MTI4MjI4LCJleHAiOjE3ODQyMTQ2Mjh9.gpVTAxNpQLCBlcN1QF2LJZA8bm21eWStrI0n12Mdcyw",
                     "type": "text"
                   }
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"propertyId\":\"7ee34da4-bb0b-4c8f-89f7-80dceaba584a\", \r\n    \"rating\":4,\r\n    \"comment\":\"This is Good Appartment\"\r\n}",
+                  "raw": "{\r\n    \"propertyId\":\"8155aea3-651a-4216-888e-0eaabd614729\", \r\n    \"rating\":5,\r\n    \"comment\":\"This is Good Appartment\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -730,13 +730,13 @@
                 "header": [
                   {
                     "key": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MDQ3MDgxLCJleHAiOjE3ODQxMzM0ODF9.IoCXZ3SN7Y0Zl_ZmMYPl_XGVj-0I_RtWlTXYJ3Cep5g",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MTA5Njg1LCJleHAiOjE3ODQxOTYwODV9.LoaafZmb9snnroiPDStf7D0rd7uCOpyYqRZWcliGw68",
                     "type": "text"
                   }
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"rentalRequestId\":\"56e8474f-e5dd-4b2d-97f8-4ee3504eb42f\"\r\n}",
+                  "raw": "{\r\n    \"rentalRequestId\":\"ad03c3a6-85fc-418d-8161-935e2e927871\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -768,7 +768,7 @@
                 "header": [
                   {
                     "key": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MDQ3MDgxLCJleHAiOjE3ODQxMzM0ODF9.IoCXZ3SN7Y0Zl_ZmMYPl_XGVj-0I_RtWlTXYJ3Cep5g",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MTA5Njg1LCJleHAiOjE3ODQxOTYwODV9.LoaafZmb9snnroiPDStf7D0rd7uCOpyYqRZWcliGw68",
                     "type": "text"
                   }
                 ],
@@ -785,6 +785,39 @@
                   "path": [
                     "api",
                     "payments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Single Payments",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MDQ3MDgxLCJleHAiOjE3ODQxMzM0ODF9.IoCXZ3SN7Y0Zl_ZmMYPl_XGVj-0I_RtWlTXYJ3Cep5g",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"rentalRequestId\":\"56e8474f-e5dd-4b2d-97f8-4ee3504eb42f\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/payments/0178a323-d5c4-43bb-81ca-7b4bcba59d12",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "payments",
+                    "0178a323-d5c4-43bb-81ca-7b4bcba59d12"
                   ]
                 }
               },
