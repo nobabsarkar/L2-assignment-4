@@ -36,14 +36,14 @@ const createRentalRequestIntoDB = async (
     },
   });
 
-  const paymentUrl = await paymentService.initiatePayment(
-    rentalRequest.id,
-    tenantId,
-  );
+  // const paymentUrl = await paymentService.initiatePayment(
+  //   rentalRequest.id,
+  //   tenantId,
+  // );
 
   return {
     rentalRequest,
-    paymentUrl,
+    // paymentUrl,
   };
 };
 

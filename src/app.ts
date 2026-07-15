@@ -40,7 +40,7 @@ app.use("/api", categoryRoutes);
 app.use("/api", propertyRoutes);
 app.use("/api", rentalRquestRoutes);
 app.use("/api", reviewRoutes);
-app.use("/api/payment", paymentRoutes);
+app.use("/api", paymentRoutes);
 
 app.use(notFound);
 

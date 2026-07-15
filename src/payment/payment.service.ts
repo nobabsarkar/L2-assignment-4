@@ -3,7 +3,10 @@ import config from "../config";
 import axios from "axios";
 import { prisma } from "../lib/prisma";
 
-const initiatePayment = async (rentalRequestId: string, tenantId: string) => {
+const initiatePaymentIntoDB = async (
+  rentalRequestId: string,
+  tenantId: string,
+) => {
   const tenant = await prisma.user.findUniqueOrThrow({
     where: {
       id: tenantId,
@@ -19,6 +22,10 @@ const initiatePayment = async (rentalRequestId: string, tenantId: string) => {
     },
   });
 
+  if (property.status !== "APPROVED") {
+    throw new Error("Rental request is not approved yet.");
+  }
+
   const tranId = `TRNX_ID_${Date.now()}`;
 
   const paymentData = {
@@ -27,9 +34,9 @@ const initiatePayment = async (rentalRequestId: string, tenantId: string) => {
     total_amount: 100,
     currency: "BDT",
     tran_id: tranId,
-    success_url: `${config.app_url}/api/payment?rentalRequestId=${rentalRequestId}&tranId=${tranId}&status=success`,
-    fail_url: `${config.app_url}/api/payment?rentalRequestId=${rentalRequestId}&tranId=${tranId}&status=fail`,
-    cancel_url: `${config.app_url}/api/payment?rentalRequestId=${rentalRequestId}&tranId=${tranId}&status=cancel`,
+    success_url: `${config.app_url}/api/payments/confirm?rentalRequestId=${rentalRequestId}&tranId=${tranId}&status=success`,
+    fail_url: `${config.app_url}/api/payments/confirm?rentalRequestId=${rentalRequestId}&tranId=${tranId}&status=fail`,
+    cancel_url: `${config.app_url}/api/payments/confirm?rentalRequestId=${rentalRequestId}&tranId=${tranId}&status=cancel`,
     cus_name: tenant?.name,
     cus_email: tenant?.email,
     cus_add1: "N/A",
@@ -59,7 +66,7 @@ const initiatePayment = async (rentalRequestId: string, tenantId: string) => {
       transactionId: tranId,
       rentalRequestId: rentalRequestId,
       tenantId: tenant?.id,
-      amount: property.property.price,
+      amount: property?.property?.price,
       status: "PENDING",
     },
   });
@@ -102,16 +109,36 @@ const validatePayment = async (
       },
       data: {
         status: "COMPLETED",
+        paidAt: new Date(),
       },
     });
   }
 
-  console.log(status);
-
   return status;
 };
 
+const getMyPaymentsFromDB = async (tenantId: string) => {
+  const result = await prisma.payment.findMany({
+    where: {
+      tenantId,
+    },
+    include: {
+      rentalRequest: {
+        include: {
+          property: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return result;
+};
+
 export const paymentService = {
-  initiatePayment,
+  initiatePaymentIntoDB,
   validatePayment,
+  getMyPaymentsFromDB,
 };
