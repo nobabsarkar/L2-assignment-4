@@ -9,6 +9,7 @@ model User {
 
     profile Profile?
     properties Property[]
+    
     rentalRequests RentalRequest[]
 
     reviews Review[]

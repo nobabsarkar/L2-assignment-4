@@ -1,0 +1,798 @@
+{
+  "info": {
+    "_postman_id": "33fd5c45-49e3-4c62-b56f-aa2aef86238e",
+    "name": "Assignment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34899093"
+  },
+  "item": [
+    {
+      "name": "Assignment-4 Copy",
+      "item": [
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Create User",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IlVzZXIiLCJyb2xlIjoidXNlciIsImlzX2FjdGl2ZSI6dHJ1ZSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTc3OTIxNDk3MCwiZXhwIjoxNzc5MzAxMzcwfQ._Q-75cbCN35QhQFao3ABkkYHtHEtTw8IY_btl9Pe9XQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"Admin\",\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"role\":\"TENANT\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/auth/register",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Users",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoibm9iYWJAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNTg2NTU0LCJleHAiOjE3ODM2NzI5NTR9.zdMVQ-9tYaoG6T__rRV_LMYum_KlIpgPEPwptYfzDVk",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"nobab@gmail.com\",\r\n    \"password\":\"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/admin/users",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "price",
+                      "value": "30",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update User Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoibm9iYWJAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNjE2MDY5LCJleHAiOjE3ODM3MDI0Njl9.BgZOJi1pbKfuaR0hDXV1N00Uiaj87SCrDOQ8ZBpTvLs",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\":\"BLOCKED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/admin/users/e80af332-bf75-4bd1-a34f-4556301b7332",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "users",
+                    "e80af332-bf75-4bd1-a34f-4556301b7332"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Properties",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoibm9iYWJAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNjE2MDY5LCJleHAiOjE3ODM3MDI0Njl9.BgZOJi1pbKfuaR0hDXV1N00Uiaj87SCrDOQ8ZBpTvLs",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"nobab@gmail.com\",\r\n    \"password\":\"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/admin/properties",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "properties"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Login User",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IlVzZXIiLCJyb2xlIjoidXNlciIsImlzX2FjdGl2ZSI6dHJ1ZSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTc3OTIxNDk3MCwiZXhwIjoxNzc5MzAxMzcwfQ._Q-75cbCN35QhQFao3ABkkYHtHEtTw8IY_btl9Pe9XQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n   \r\n    \"email\":\"tenant@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/auth/login",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Refresh Token",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IlVzZXIiLCJyb2xlIjoidXNlciIsImlzX2FjdGl2ZSI6dHJ1ZSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTc3OTIxNDk3MCwiZXhwIjoxNzc5MzAxMzcwfQ._Q-75cbCN35QhQFao3ABkkYHtHEtTw8IY_btl9Pe9XQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n   \r\n    \"email\":\"nobab@@gmail.com\", \r\n    \"password\": \"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/auth/refresh-token",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "refresh-token"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Me",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MDkzNzAwLCJleHAiOjE3ODQxODAxMDB9.ZDhyaFUTq18XR9tITinh0rmgB2fzCbogyw6IcNu8hRs",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"nobab@gmail.com\",\r\n    \"password\":\"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/auth/me",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "item": [
+            {
+              "name": "Create Category",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJ0b20iLCJlbWFpbCI6InRvbUBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzgzMzI5ODYxLCJleHAiOjE3ODM0MTYyNjF9.Nt0b-qKzzM0B4n0KjjQMUq-H0CYnH7ZqKnsW5AXL160",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Apartment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/category",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "category"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Categories",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"nobab@gmail.com\",\r\n    \"password\":\"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/categories",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "categories"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Property",
+          "item": [
+            {
+              "name": "Create Property",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkNGU5NGQ4LWViMmQtNGIzNy1hODhhLWU5ZWYwZTdhNTU5NSIsIm5hbWUiOiJMYW5kbG9yZCIsImVtYWlsIjoibGFuZGxvcmRAZ21haWwuY29tIiwicm9sZSI6IkxBTkRMT1JEIiwiaWF0IjoxNzg0MDE2MzQwLCJleHAiOjE3ODQxMDI3NDB9.c9GSFAwc3ZQiTr4a8kDpi5Jd-eWuMGhInI5t0ctzA2E",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Luxury Apartment\",\r\n  \"description\": \"A fully furnished 3-bedroom apartment.\",\r\n  \"location\": \"nator\",\r\n  \"price\": 100,\r\n  \"bedrooms\": 3,\r\n  \"bathrooms\": 2,\r\n  \"amenities\": [\r\n    \"WiFi\",\r\n    \"Parking\",\r\n    \"Lift\",\r\n    \"Security\"\r\n  ],\r\n  \"images\": [\r\n    \"https://example.com/image1.jpg\",\r\n    \"https://example.com/image2.jpg\"\r\n  ],\r\n  \"categoryId\": \"39f60100-7a0a-42f3-962e-40948a5fc660\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/landlord/properties",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "landlord",
+                    "properties"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Single Property",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "localhost:5000/api/properties/6850109e-71cd-4fac-a18d-6b2d648d484f",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "properties",
+                    "6850109e-71cd-4fac-a18d-6b2d648d484f"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Property",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"nobab@gmail.com\",\r\n    \"password\":\"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/properties",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "properties"
+                  ],
+                  "query": [
+                    {
+                      "key": "price",
+                      "value": "30",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "updatePropertiesLandlord",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxZjAyMDU1LTdhYWQtNGY1Ni1hZDNjLTM3OGM3ZjNhYjcyYSIsIm5hbWUiOiJMYW5kbG9yZCIsImVtYWlsIjoibGFuZGxvcmRAZ21haWwuY29tIiwicm9sZSI6IkxBTkRMT1JEIiwiaWF0IjoxNzg0MTA2MzkzLCJleHAiOjE3ODQxOTI3OTN9.4OZikWilStMAAB9iBkCVowrUGu5vJnVVbMhygOpr0D0",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"price\": 200\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/landlord/properties/6850109e-71cd-4fac-a18d-6b2d648d484f",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "landlord",
+                    "properties",
+                    "6850109e-71cd-4fac-a18d-6b2d648d484f"
+                  ],
+                  "query": [
+                    {
+                      "key": "price",
+                      "value": "30",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Property Landlord",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxZjAyMDU1LTdhYWQtNGY1Ni1hZDNjLTM3OGM3ZjNhYjcyYSIsIm5hbWUiOiJMYW5kbG9yZCIsImVtYWlsIjoibGFuZGxvcmRAZ21haWwuY29tIiwicm9sZSI6IkxBTkRMT1JEIiwiaWF0IjoxNzg0MTA2MzkzLCJleHAiOjE3ODQxOTI3OTN9.4OZikWilStMAAB9iBkCVowrUGu5vJnVVbMhygOpr0D0",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:5000/api/landlord/properties/4d7878ee-297a-4fa5-879f-4d3029fddd84",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "landlord",
+                    "properties",
+                    "4d7878ee-297a-4fa5-879f-4d3029fddd84"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Rental Request",
+          "item": [
+            {
+              "name": "Create Rental Request",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MTA2NzkyLCJleHAiOjE3ODQxOTMxOTJ9.ElDMeBBpUiVR5RtEpBGaEv-mFAGdYyxCcV222wD9lCk",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"propertyId\":\"8155aea3-651a-4216-888e-0eaabd614729\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/rentals",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "rentals"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Rental Request",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MTA2NzkyLCJleHAiOjE3ODQxOTMxOTJ9.ElDMeBBpUiVR5RtEpBGaEv-mFAGdYyxCcV222wD9lCk",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:5000/api/rentals",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "rentals"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Single Rental Request",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1Yzk1MjQ0LTNiNjgtNGRjNi1hZTBlLWE4ZTI4YTQ3MmQ5NyIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MTA2NzkyLCJleHAiOjE3ODQxOTMxOTJ9.ElDMeBBpUiVR5RtEpBGaEv-mFAGdYyxCcV222wD9lCk",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"nobab@gmail.com\",\r\n    \"password\":\"123456\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/rentals/ad03c3a6-85fc-418d-8161-935e2e927871",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "rentals",
+                    "ad03c3a6-85fc-418d-8161-935e2e927871"
+                  ],
+                  "query": [
+                    {
+                      "key": "price",
+                      "value": "30",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Rental Request",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNGMzYzE3LWMxMGItNDE3OC05NmU5LWViZWMwYzQzNjUyMiIsIm5hbWUiOiJub2JhYiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzgzNzA4NjQwLCJleHAiOjE3ODM3OTUwNDB9.ZgF6zZT4Qw2dl5Pg-YygMKoK3R2Es3gUG-zhSiLHWbc",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:5000/api/admin/rentals",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "rentals"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Landlord Get Rental Request",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxZjAyMDU1LTdhYWQtNGY1Ni1hZDNjLTM3OGM3ZjNhYjcyYSIsIm5hbWUiOiJMYW5kbG9yZCIsImVtYWlsIjoibGFuZGxvcmRAZ21haWwuY29tIiwicm9sZSI6IkxBTkRMT1JEIiwiaWF0IjoxNzg0MTA3MDI4LCJleHAiOjE3ODQxOTM0Mjh9.fGCziRN624dIBkzEJMCe2VaOh9xkq3T7okfbJiLpOzs",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:5000/api/landlord/requests",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "landlord",
+                    "requests"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Rental Request Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxZjAyMDU1LTdhYWQtNGY1Ni1hZDNjLTM3OGM3ZjNhYjcyYSIsIm5hbWUiOiJMYW5kbG9yZCIsImVtYWlsIjoibGFuZGxvcmRAZ21haWwuY29tIiwicm9sZSI6IkxBTkRMT1JEIiwiaWF0IjoxNzg0MTA3MDI4LCJleHAiOjE3ODQxOTM0Mjh9.fGCziRN624dIBkzEJMCe2VaOh9xkq3T7okfbJiLpOzs",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\":\"REJECTED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/landlord/requests/99eadca4-d6cd-4b9b-b605-e67afb9d50e8",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "landlord",
+                    "requests",
+                    "99eadca4-d6cd-4b9b-b605-e67afb9d50e8"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Create Review",
+          "item": [
+            {
+              "name": "Create Review",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzgzNzU1NTI3LCJleHAiOjE3ODM4NDE5Mjd9.2HIuTVi110lQo85AhsaY215-oUQM_6JsxQUwYKYsSa4",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"propertyId\":\"7ee34da4-bb0b-4c8f-89f7-80dceaba584a\", \r\n    \"rating\":4,\r\n    \"comment\":\"This is Good Appartment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/reviews",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "reviews"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Payment",
+          "item": [
+            {
+              "name": "Create Payment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MDQ3MDgxLCJleHAiOjE3ODQxMzM0ODF9.IoCXZ3SN7Y0Zl_ZmMYPl_XGVj-0I_RtWlTXYJ3Cep5g",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"rentalRequestId\":\"56e8474f-e5dd-4b2d-97f8-4ee3504eb42f\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "localhost:5000/api/payments/create",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "payments",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get My Payments",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzODg4MjU0LTMzYTYtNDI4YS04M2I0LWNmMzgzYTNlMWNmZCIsIm5hbWUiOiJUZW5hbnQiLCJlbWFpbCI6InRlbmFudEBnbWFpbC5jb20iLCJyb2xlIjoiVEVOQU5UIiwiaWF0IjoxNzg0MDQ3MDgxLCJleHAiOjE3ODQxMzM0ODF9.IoCXZ3SN7Y0Zl_ZmMYPl_XGVj-0I_RtWlTXYJ3Cep5g",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"rentalRequestId\":\"56e8474f-e5dd-4b2d-97f8-4ee3504eb42f\"\r\n}"
+                },
+                "url": {
+                  "raw": "localhost:5000/api/payments",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "payments"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

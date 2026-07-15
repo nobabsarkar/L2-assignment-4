@@ -15,4 +15,10 @@ router.post("/payments/confirm", paymentController.verifyPayment);
 
 router.get("/payments", auth(Role.TENANT), paymentController.getMyPayments);
 
+router.get(
+  "/payments/:paymentId",
+  auth(Role.TENANT),
+  paymentController.getSinglepayments,
+);
+
 export const paymentRoutes = router;

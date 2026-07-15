@@ -2,6 +2,7 @@ import type { JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import axios from "axios";
 import { prisma } from "../lib/prisma";
+import { RentalStatus } from "../../generated/prisma/enums";
 
 const initiatePaymentIntoDB = async (
   rentalRequestId: string,
@@ -22,8 +23,8 @@ const initiatePaymentIntoDB = async (
     },
   });
 
-  if (property.status !== "APPROVED") {
-    throw new Error("Rental request is not approved yet.");
+  if (property?.status !== RentalStatus.APPROVED) {
+    throw new Error("Rental request not Approved.");
   }
 
   const tranId = `TRNX_ID_${Date.now()}`;
@@ -137,8 +138,19 @@ const getMyPaymentsFromDB = async (tenantId: string) => {
   return result;
 };
 
+const getSinglePaymentsFromDB = async (paymentId: string) => {
+  const result = await prisma.payment.findUnique({
+    where: {
+      id: paymentId,
+    },
+  });
+
+  return result;
+};
+
 export const paymentService = {
   initiatePaymentIntoDB,
   validatePayment,
   getMyPaymentsFromDB,
+  getSinglePaymentsFromDB,
 };

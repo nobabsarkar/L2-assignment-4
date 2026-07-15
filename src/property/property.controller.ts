@@ -107,7 +107,7 @@ const landlordGetRentalRequest = catchAsync(
 const landlordUpdateRentalRequestStatus = catchAsync(
   async (req: Request, res: Response) => {
     const landlordId = req.user?.id;
-    const requestId = req.params.id;
+    const requestId = req.params.requestId;
     const { status } = req.body;
 
     const result =

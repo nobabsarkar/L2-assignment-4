@@ -53,8 +53,23 @@ const getMyPayments = catchAsync(async (req, res) => {
   });
 });
 
+const getSinglepayments = catchAsync(async (req, res) => {
+  const paymentId = req.params.paymentId;
+  const result = await paymentService.getSinglePaymentsFromDB(
+    paymentId as string,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Payment history retrived successfully",
+    data: result,
+  });
+});
+
 export const paymentController = {
   verifyPayment,
   initiatePayment,
   getMyPayments,
+  getSinglepayments,
 };
