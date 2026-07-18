@@ -1,9 +1,0 @@
-import type { Role } from "../../generated/prisma/enums";
-export interface RegisterUser {
-    name: string;
-    email: string;
-    password: string;
-    role: Role;
-    profilePhoto?: string;
-}
-//# sourceMappingURL=user.interface.d.ts.map
