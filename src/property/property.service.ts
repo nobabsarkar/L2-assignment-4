@@ -48,6 +48,7 @@ const getAllPropertyFromDB = async (query: any) => {
           password: true,
         },
       },
+      category: true,
     },
   });
 
@@ -57,6 +58,13 @@ const getAllPropertyFromDB = async (query: any) => {
 const getSinglePropertyFromDB = async (propertyId: string) => {
   const result = await prisma.property.findUniqueOrThrow({
     where: { id: propertyId },
+    include: {
+      landlord: {
+        omit: {
+          password: true,
+        },
+      },
+    },
   });
 
   return result;
