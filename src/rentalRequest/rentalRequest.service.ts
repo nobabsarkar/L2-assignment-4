@@ -53,7 +53,14 @@ const getAllRentalsRequestFromDB = async (tenantId: string) => {
       tenantId,
     },
     include: {
-      property: true,
+      property: {
+        include: {
+          landlord: true,
+        },
+        omit: {
+          landlordId: true,
+        },
+      },
     },
     omit: {
       propertyId: true,
