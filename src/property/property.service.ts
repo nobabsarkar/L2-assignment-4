@@ -1,7 +1,7 @@
 import type { RentalStatus } from "../../generated/prisma/enums";
 import type { PropertyWhereInput } from "../../generated/prisma/models";
 import { prisma } from "../lib/prisma";
-import type { IPostQuery, IProperty } from "./property.interface";
+import type { IProperty } from "./property.interface";
 
 const createPropertyIntoDB = async (payload: IProperty, landlordId: string) => {
   const result = await prisma.property.create({
@@ -96,26 +96,6 @@ const updatePropertiesLandlordIntoDB = async (
   return result;
 };
 
-const deletePropertiesLandlordFromDB = async (
-  propertyId: string,
-  landlordId: string,
-) => {
-  await prisma.property.findFirstOrThrow({
-    where: {
-      id: propertyId,
-      landlordId,
-    },
-  });
-
-  const result = await prisma.property.delete({
-    where: {
-      id: propertyId,
-    },
-  });
-
-  return result;
-};
-
 const landloadGetRentalRequestFromDB = async (landlordId: string) => {
   const result = await prisma.rentalRequest.findMany({
     where: {
@@ -130,6 +110,39 @@ const landloadGetRentalRequestFromDB = async (landlordId: string) => {
     omit: {
       tenantId: true,
       propertyId: true,
+    },
+  });
+
+  return result;
+};
+
+const landlordGetAllPropertiesFromDB = async (landlordId: string) => {
+  const properties = await prisma.property.findMany({
+    where: {
+      landlordId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return properties;
+};
+
+const deletePropertiesLandlordFromDB = async (
+  propertyId: string,
+  landlordId: string,
+) => {
+  await prisma.property.findFirstOrThrow({
+    where: {
+      id: propertyId,
+      landlordId,
+    },
+  });
+
+  const result = await prisma.property.delete({
+    where: {
+      id: propertyId,
     },
   });
 
@@ -167,6 +180,7 @@ export const propertySerivce = {
   getAllPropertyFromDB,
   getSinglePropertyFromDB,
   updatePropertiesLandlordIntoDB,
+  landlordGetAllPropertiesFromDB,
   deletePropertiesLandlordFromDB,
   landloadGetRentalRequestFromDB,
   landlordUpdateRentalRequestStatusIntoDB,

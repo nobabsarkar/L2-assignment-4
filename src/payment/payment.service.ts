@@ -138,14 +138,36 @@ const getMyPaymentsFromDB = async (tenantId: string) => {
   return result;
 };
 
-const getSinglePaymentsFromDB = async (paymentId: string) => {
+const getSinglePaymentsFromDB = async (transactionId: string) => {
   const result = await prisma.payment.findUnique({
     where: {
-      id: paymentId,
+      transactionId: transactionId,
     },
   });
 
   return result;
+};
+
+const getLandlordEarningsFromDB = async (landlordId: string) => {
+  const payments = await prisma.payment.findMany({
+    where: {
+      status: "COMPLETED",
+      rentalRequest: {
+        property: {
+          landlordId,
+        },
+      },
+    },
+  });
+
+  const totalEarnings = payments.reduce(
+    (total, payment) => total + payment.amount,
+    0,
+  );
+
+  return {
+    totalEarnings,
+  };
 };
 
 export const paymentService = {
@@ -153,4 +175,5 @@ export const paymentService = {
   validatePayment,
   getMyPaymentsFromDB,
   getSinglePaymentsFromDB,
+  getLandlordEarningsFromDB,
 };

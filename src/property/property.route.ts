@@ -15,22 +15,29 @@ router.get("/properties", propertyController.getAllProperty);
 
 router.get("/properties/:propertyId", propertyController.getSingleProperty);
 
+//
 router.put(
   "/landlord/properties/:propertyId",
   auth(Role.LANDLORD),
   propertyController.updatePropertiesLandlord,
 );
 
-router.delete(
-  "/landlord/properties/:propertyId",
-  auth(Role.LANDLORD),
-  propertyController.deletePropertiesLandlord,
-);
-
 router.get(
   "/landlord/requests",
   auth(Role.LANDLORD),
   propertyController.landlordGetRentalRequest,
+);
+
+router.get(
+  "/landlord/properties",
+  auth(Role.LANDLORD),
+  propertyController.landlordGetAllProperties,
+);
+
+router.delete(
+  "/landlord/properties/:propertyId",
+  auth(Role.LANDLORD),
+  propertyController.deletePropertiesLandlord,
 );
 
 router.patch(

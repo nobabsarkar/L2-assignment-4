@@ -834,14 +834,22 @@ var getAllPropertyFromDB = async (query) => {
         omit: {
           password: true
         }
-      }
+      },
+      category: true
     }
   });
   return result;
 };
 var getSinglePropertyFromDB = async (propertyId) => {
   const result = await prisma.property.findUniqueOrThrow({
-    where: { id: propertyId }
+    where: { id: propertyId },
+    include: {
+      landlord: {
+        omit: {
+          password: true
+        }
+      }
+    }
   });
   return result;
 };
@@ -863,20 +871,6 @@ var updatePropertiesLandlordIntoDB = async (propertyId, landlordId, payload) => 
   });
   return result;
 };
-var deletePropertiesLandlordFromDB = async (propertyId, landlordId) => {
-  await prisma.property.findFirstOrThrow({
-    where: {
-      id: propertyId,
-      landlordId
-    }
-  });
-  const result = await prisma.property.delete({
-    where: {
-      id: propertyId
-    }
-  });
-  return result;
-};
 var landloadGetRentalRequestFromDB = async (landlordId) => {
   const result = await prisma.rentalRequest.findMany({
     where: {
@@ -891,6 +885,31 @@ var landloadGetRentalRequestFromDB = async (landlordId) => {
     omit: {
       tenantId: true,
       propertyId: true
+    }
+  });
+  return result;
+};
+var landlordGetAllPropertiesFromDB = async (landlordId) => {
+  const properties = await prisma.property.findMany({
+    where: {
+      landlordId
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+  return properties;
+};
+var deletePropertiesLandlordFromDB = async (propertyId, landlordId) => {
+  await prisma.property.findFirstOrThrow({
+    where: {
+      id: propertyId,
+      landlordId
+    }
+  });
+  const result = await prisma.property.delete({
+    where: {
+      id: propertyId
     }
   });
   return result;
@@ -919,6 +938,7 @@ var propertySerivce = {
   getAllPropertyFromDB,
   getSinglePropertyFromDB,
   updatePropertiesLandlordIntoDB,
+  landlordGetAllPropertiesFromDB,
   deletePropertiesLandlordFromDB,
   landloadGetRentalRequestFromDB,
   landlordUpdateRentalRequestStatusIntoDB
@@ -978,6 +998,32 @@ var updatePropertiesLandlord = catchAsync(
     });
   }
 );
+var landlordGetRentalRequest = catchAsync(
+  async (req, res) => {
+    const landlordId = req.user?.id;
+    const result = await propertySerivce.landloadGetRentalRequestFromDB(
+      landlordId
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus5.OK,
+      message: "Landlord get rental request successfully",
+      data: result
+    });
+  }
+);
+var landlordGetAllProperties = catchAsync(async (req, res) => {
+  const landlordId = req.user?.id;
+  const result = await propertySerivce.landlordGetAllPropertiesFromDB(
+    landlordId
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus5.OK,
+    message: "Landlord properties retrieved successfully",
+    data: result
+  });
+});
 var deletePropertiesLandlord = catchAsync(
   async (req, res) => {
     const propertyId = req.params.propertyId;
@@ -990,20 +1036,6 @@ var deletePropertiesLandlord = catchAsync(
       success: true,
       statusCode: httpStatus5.OK,
       message: " Delete property successfully",
-      data: result
-    });
-  }
-);
-var landlordGetRentalRequest = catchAsync(
-  async (req, res) => {
-    const landlordId = req.user?.id;
-    const result = await propertySerivce.landloadGetRentalRequestFromDB(
-      landlordId
-    );
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus5.OK,
-      message: "Landlord get rental request successfully",
       data: result
     });
   }
@@ -1031,8 +1063,9 @@ var propertyController = {
   getAllProperty,
   getSingleProperty,
   updatePropertiesLandlord,
-  deletePropertiesLandlord,
   landlordGetRentalRequest,
+  landlordGetAllProperties,
+  deletePropertiesLandlord,
   landlordUpdateRentalRequestStatus
 };
 
@@ -1050,15 +1083,20 @@ router4.put(
   auth(Role.LANDLORD),
   propertyController.updatePropertiesLandlord
 );
-router4.delete(
-  "/landlord/properties/:propertyId",
-  auth(Role.LANDLORD),
-  propertyController.deletePropertiesLandlord
-);
 router4.get(
   "/landlord/requests",
   auth(Role.LANDLORD),
   propertyController.landlordGetRentalRequest
+);
+router4.get(
+  "/landlord/properties",
+  auth(Role.LANDLORD),
+  propertyController.landlordGetAllProperties
+);
+router4.delete(
+  "/landlord/properties/:propertyId",
+  auth(Role.LANDLORD),
+  propertyController.deletePropertiesLandlord
 );
 router4.patch(
   "/landlord/requests/:requestId",
@@ -1181,19 +1219,39 @@ var getMyPaymentsFromDB = async (tenantId) => {
   });
   return result;
 };
-var getSinglePaymentsFromDB = async (paymentId) => {
+var getSinglePaymentsFromDB = async (transactionId) => {
   const result = await prisma.payment.findUnique({
     where: {
-      id: paymentId
+      transactionId
     }
   });
   return result;
+};
+var getLandlordEarningsFromDB = async (landlordId) => {
+  const payments = await prisma.payment.findMany({
+    where: {
+      status: "COMPLETED",
+      rentalRequest: {
+        property: {
+          landlordId
+        }
+      }
+    }
+  });
+  const totalEarnings = payments.reduce(
+    (total, payment) => total + payment.amount,
+    0
+  );
+  return {
+    totalEarnings
+  };
 };
 var paymentService = {
   initiatePaymentIntoDB,
   validatePayment,
   getMyPaymentsFromDB,
-  getSinglePaymentsFromDB
+  getSinglePaymentsFromDB,
+  getLandlordEarningsFromDB
 };
 
 // src/rentalRequest/rentalRequest.service.ts
@@ -1232,7 +1290,14 @@ var getAllRentalsRequestFromDB2 = async (tenantId) => {
       tenantId
     },
     include: {
-      property: true
+      property: {
+        include: {
+          landlord: true
+        },
+        omit: {
+          landlordId: true
+        }
+      }
     },
     omit: {
       propertyId: true
@@ -1427,7 +1492,9 @@ var verifyPayment = catchAsync(async (req, res) => {
     payload
   );
   if (result === "success") {
-    res.redirect("http://localhost:5000/payment-success");
+    res.redirect(
+      `http://localhost:3000/tenant-dashboard/payment-success/${tranId}`
+    );
   }
   sendResponse(res, {
     success: true,
@@ -1448,9 +1515,9 @@ var getMyPayments = catchAsync(async (req, res) => {
   });
 });
 var getSinglepayments = catchAsync(async (req, res) => {
-  const paymentId = req.params.paymentId;
+  const transactionId = req.params.transactionId;
   const result = await paymentService.getSinglePaymentsFromDB(
-    paymentId
+    transactionId
   );
   sendResponse(res, {
     success: true,
@@ -1459,11 +1526,24 @@ var getSinglepayments = catchAsync(async (req, res) => {
     data: result
   });
 });
+var getLandlordEarnings = catchAsync(async (req, res) => {
+  const landlordId = req?.user?.id;
+  const result = await paymentService.getLandlordEarningsFromDB(
+    landlordId
+  );
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Landlord earnings retrieved successfully",
+    data: result
+  });
+});
 var paymentController = {
   verifyPayment,
   initiatePayment,
   getMyPayments,
-  getSinglepayments
+  getSinglepayments,
+  getLandlordEarnings
 };
 
 // src/payment/payment.route.ts
@@ -1476,9 +1556,14 @@ router7.post(
 router7.post("/payments/confirm", paymentController.verifyPayment);
 router7.get("/payments", auth(Role.TENANT), paymentController.getMyPayments);
 router7.get(
-  "/payments/:paymentId",
+  "/payments/:transactionId",
   auth(Role.TENANT),
   paymentController.getSinglepayments
+);
+router7.get(
+  "/landlord/earnings",
+  auth(Role.LANDLORD),
+  paymentController.getLandlordEarnings
 );
 var paymentRoutes = router7;
 

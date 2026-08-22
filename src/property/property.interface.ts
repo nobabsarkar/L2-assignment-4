@@ -8,8 +8,8 @@ export interface IProperty {
   amenities: string[];
   images: string[];
 
-  landlordId: string;
   categoryId: string;
+  landlordId: string;
 }
 
 export interface IPostQuery {

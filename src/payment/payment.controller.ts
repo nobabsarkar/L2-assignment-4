@@ -19,6 +19,7 @@ const initiatePayment = catchAsync(async (req, res) => {
 
 const verifyPayment = catchAsync(async (req, res) => {
   const { rentalRequestId, tranId, status } = req.query;
+
   const payload = req.body;
 
   const result = await paymentService.validatePayment(
@@ -29,7 +30,9 @@ const verifyPayment = catchAsync(async (req, res) => {
   );
 
   if (result === "success") {
-    res.redirect("http://localhost:5000/payment-success");
+    res.redirect(
+      `http://localhost:3000/tenant-dashboard/payment-success/${tranId}`,
+    );
   }
 
   sendResponse(res, {
@@ -54,9 +57,10 @@ const getMyPayments = catchAsync(async (req, res) => {
 });
 
 const getSinglepayments = catchAsync(async (req, res) => {
-  const paymentId = req.params.paymentId;
+  const transactionId = req.params.transactionId;
+
   const result = await paymentService.getSinglePaymentsFromDB(
-    paymentId as string,
+    transactionId as string,
   );
 
   sendResponse(res, {
@@ -67,9 +71,25 @@ const getSinglepayments = catchAsync(async (req, res) => {
   });
 });
 
+const getLandlordEarnings = catchAsync(async (req, res) => {
+  const landlordId = req?.user?.id;
+
+  const result = await paymentService.getLandlordEarningsFromDB(
+    landlordId as string,
+  );
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Landlord earnings retrieved successfully",
+    data: result,
+  });
+});
+
 export const paymentController = {
   verifyPayment,
   initiatePayment,
   getMyPayments,
   getSinglepayments,
+  getLandlordEarnings,
 };

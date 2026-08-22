@@ -48,6 +48,7 @@ const getSingleProperty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+//
 const updatePropertiesLandlord = catchAsync(
   async (req: Request, res: Response) => {
     const propertyId = req.params.propertyId;
@@ -68,6 +69,38 @@ const updatePropertiesLandlord = catchAsync(
   },
 );
 
+const landlordGetRentalRequest = catchAsync(
+  async (req: Request, res: Response) => {
+    const landlordId = req.user?.id;
+
+    const result = await propertySerivce.landloadGetRentalRequestFromDB(
+      landlordId as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Landlord get rental request successfully",
+      data: result,
+    });
+  },
+);
+
+const landlordGetAllProperties = catchAsync(async (req, res) => {
+  const landlordId = req.user?.id;
+
+  const result = await propertySerivce.landlordGetAllPropertiesFromDB(
+    landlordId as string,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Landlord properties retrieved successfully",
+    data: result,
+  });
+});
+
 const deletePropertiesLandlord = catchAsync(
   async (req: Request, res: Response) => {
     const propertyId = req.params.propertyId;
@@ -82,23 +115,6 @@ const deletePropertiesLandlord = catchAsync(
       success: true,
       statusCode: httpStatus.OK,
       message: " Delete property successfully",
-      data: result,
-    });
-  },
-);
-
-const landlordGetRentalRequest = catchAsync(
-  async (req: Request, res: Response) => {
-    const landlordId = req.user?.id;
-
-    const result = await propertySerivce.landloadGetRentalRequestFromDB(
-      landlordId as string,
-    );
-
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus.OK,
-      message: "Landlord get rental request successfully",
       data: result,
     });
   },
@@ -131,7 +147,8 @@ export const propertyController = {
   getAllProperty,
   getSingleProperty,
   updatePropertiesLandlord,
-  deletePropertiesLandlord,
   landlordGetRentalRequest,
+  landlordGetAllProperties,
+  deletePropertiesLandlord,
   landlordUpdateRentalRequestStatus,
 };
