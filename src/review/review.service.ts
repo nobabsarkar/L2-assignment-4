@@ -26,6 +26,10 @@ const createReviewIntoDB = async (tenantId: string, payload: IReview) => {
     },
   });
 
+  if (payload?.propertyId !== payment?.rentalRequest?.propertyId) {
+    throw new Error("Property ID does not match.");
+  }
+
   // 3. Payment must exist and be completed
   if (!payment) {
     throw new Error("You can review only after successful payment");
