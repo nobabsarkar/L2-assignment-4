@@ -63,6 +63,27 @@ const createReviewIntoDB = async (tenantId: string, payload: IReview) => {
   return result;
 };
 
+const getAllReviewsFromDB = async (propertyId: string) => {
+  const result = await prisma.review.findMany({
+    where: {
+      propertyId: propertyId,
+    },
+    include: {
+      tenant: {
+        omit: {
+          password: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return result;
+};
+
 export const reviewService = {
   createReviewIntoDB,
+  getAllReviewsFromDB,
 };

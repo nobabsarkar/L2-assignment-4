@@ -7,4 +7,10 @@ const router = Router();
 
 router.post("/reviews", auth(Role.TENANT), reviewController.createReview);
 
+router.get(
+  "/reviews/:propertyId",
+  auth(Role.TENANT, Role.ADMIN, Role.LANDLORD),
+  reviewController.getAllReviews,
+);
+
 export const reviewRoutes = router;

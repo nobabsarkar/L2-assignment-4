@@ -1408,20 +1408,31 @@ var createReviewIntoDB = async (tenantId, payload) => {
   }
   const payment = await prisma.payment.findFirst({
     where: {
+      id: payload?.paymentId,
       tenantId,
-      status: PaymentStatus.COMPLETED,
+      status: PaymentStatus.COMPLETED
+    },
+    include: {
       rentalRequest: {
-        propertyId: payload.propertyId
+        select: {
+          id: true,
+          tenantId: true,
+          propertyId: true
+        }
       }
     }
   });
-  if (!payment) {
-    throw new Error("You can review only after successfull payment");
+  if (payload?.propertyId !== payment?.rentalRequest?.propertyId) {
+    throw new Error("Property ID does not match.");
   }
+  if (!payment) {
+    throw new Error("You can review only after successful payment");
+  }
+  const propertyId = payment.rentalRequest.propertyId;
   const existingReview = await prisma.review.findFirst({
     where: {
       tenantId,
-      propertyId: payload.propertyId
+      propertyId
     }
   });
   if (existingReview) {
@@ -1432,37 +1443,72 @@ var createReviewIntoDB = async (tenantId, payload) => {
       rating: payload.rating,
       comment: payload.comment,
       tenantId,
-      propertyId: payload.propertyId
+      propertyId
+    }
+  });
+  return result;
+};
+var getAllReviewsFromDB = async (propertyId) => {
+  const result = await prisma.review.findMany({
+    where: {
+      propertyId
+    },
+    include: {
+      tenant: {
+        omit: {
+          password: true
+        }
+      }
+    },
+    orderBy: {
+      createdAt: "desc"
     }
   });
   return result;
 };
 var reviewService = {
-  createReviewIntoDB
+  createReviewIntoDB,
+  getAllReviewsFromDB
 };
 
 // src/review/review.controller.ts
 var createReview = catchAsync(async (req, res) => {
   const tenantId = req.user?.id;
+  if (!tenantId) {
+    throw new Error("Unauthorized");
+  }
   const payload = req.body;
-  const result = await reviewService.createReviewIntoDB(
-    tenantId,
-    payload
-  );
+  const result = await reviewService.createReviewIntoDB(tenantId, payload);
   sendResponse(res, {
     success: true,
-    statusCode: httpStatus7.OK,
-    message: "Review create successfully",
+    statusCode: httpStatus7.CREATED,
+    message: "Review created successfully",
+    data: result
+  });
+});
+var getAllReviews = catchAsync(async (req, res) => {
+  const { propertyId } = req.params;
+  const result = await reviewService.getAllReviewsFromDB(propertyId);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus7.CREATED,
+    message: "Review retrieved successfully",
     data: result
   });
 });
 var reviewController = {
-  createReview
+  createReview,
+  getAllReviews
 };
 
 // src/review/review.route.ts
 var router6 = Router6();
 router6.post("/reviews", auth(Role.TENANT), reviewController.createReview);
+router6.get(
+  "/reviews/:propertyId",
+  auth(Role.TENANT, Role.ADMIN, Role.LANDLORD),
+  reviewController.getAllReviews
+);
 var reviewRoutes = router6;
 
 // src/payment/payment.route.ts
@@ -1493,7 +1539,8 @@ var verifyPayment = catchAsync(async (req, res) => {
   );
   if (result === "success") {
     res.redirect(
-      `http://localhost:3000/tenant-dashboard/payment-success/${tranId}`
+      // `http://localhost:3000/tenant-dashboard/payment-success/${tranId}`,
+      `https://level2-assignment-5-cyan.vercel.app/tenant-dashboard/payment-success/${tranId}`
     );
   }
   sendResponse(res, {
